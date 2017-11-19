@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FotoComponent } from '../foto/foto.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FotoService } from '../foto/foto.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -15,10 +15,13 @@ export class CadastroComponent {
     meuForm: FormGroup;
     service: FotoService;
     route: ActivatedRoute;
+    router: Router;
+    mensagem: string = '';
 
-    constructor(service: FotoService, fb: FormBuilder, route: ActivatedRoute) {
+    constructor(service: FotoService, fb: FormBuilder, route: ActivatedRoute, router: Router) {
         this.service = service;
         this.route = route;
+        this.router = router;
 
         this.route.params.subscribe(params => {
 
@@ -45,10 +48,10 @@ export class CadastroComponent {
 
         this.service
             .cadastrar(this.foto)
-            .subscribe(() => {
+            .subscribe(res => {
+                this.mensagem = res.mensagem;
                 this.foto = new FotoComponent();
+                if(!res.inclusao) this.router.navigate(['']);
             }, err => console.log(err));
     }
-
-
 }
