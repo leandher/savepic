@@ -2,6 +2,10 @@ npm init
 
 npm install express --save
 
+npm install express-load --save
+
+npm install body-parser --save
+
 npm install mysql --save
 
 sudo apt-get install mysql-server
