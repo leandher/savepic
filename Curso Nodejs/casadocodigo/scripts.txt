@@ -6,6 +6,8 @@ npm install express-load --save
 
 npm install body-parser --save
 
+npm install express-validator --save
+
 npm install mysql --save
 
 sudo apt-get install mysql-server
